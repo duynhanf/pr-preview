@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 env:
   REPOSITORY: my-repository
-  PROJECT: my-deploy-preview
+  PROJECT: buta-change
   LOCATION: asia-northeast1
   SERVICE: my-service
   CLOUD_SQL_INSTANCE: my-sql-instance
@@ -26,4 +26,10 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t pr-preview -f ./Dockerfile .
+          docker build -t ${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} -f ./Dockerfile .
+      
+      # gcloud auth configure-docker の後であればArtifact Registryへ docker push することができる
+      - name: Publish image to Google Artifact Registry
+        run: |
+          docker push ${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
+      

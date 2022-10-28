@@ -1,6 +1,13 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+env:
+  REPOSITORY: my-repository
+  PROJECT: my-deploy-preview
+  LOCATION: asia-northeast1
+  SERVICE: my-service
+  CLOUD_SQL_INSTANCE: my-sql-instance
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -8,5 +15,15 @@ jobs:
       - name: Checkout
         uses: "actions/checkout@v3"
 
-      - name: Authenticate Google Cloud
-        uses: "google-github-actions/auth@v0"
+      # - name: Authenticate Google Cloud
+      #   uses: "google-github-actions/auth@v0"
+
+      - name: Setup Cloud SDK
+        uses: "google-github-actions/setup-gcloud@v0"
+
+      - name: Configure docker
+        run: gcloud auth configure-docker ${{ env.LOCATION }}-docker.pkg.dev
+
+      - name: Build image
+        run: |
+          docker build -t pr-preview -f ./Dockerfile .

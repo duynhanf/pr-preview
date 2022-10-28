@@ -1,4 +1,4 @@
-module pr-preview-cloud-run
+module github.com/duynhanf/pr-preview
 
 go 1.19
 

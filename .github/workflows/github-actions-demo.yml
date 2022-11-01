@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 env:
   REPOSITORY: my-repository
-  PROJECT: buta-change
+  PROJECT: buta-chan
   LOCATION: asia-northeast1
   SERVICE: my-service
   CLOUD_SQL_INSTANCE: my-sql-instance
@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: "actions/checkout@v3"
 
-      # - name: Authenticate Google Cloud
-      #   uses: "google-github-actions/auth@v0"
+      - name: Authenticate Google Cloud
+        uses: "google-github-actions/auth@v0"
 
       - name: Setup Cloud SDK
         uses: "google-github-actions/setup-gcloud@v0"

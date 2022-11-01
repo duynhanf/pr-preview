@@ -32,12 +32,11 @@ jobs:
           workload_identity_provider: 'projects/61926662696/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'cloud-run-deploy-preview@buta-chan.iam.gserviceaccount.com'
 
-
       - name: Setup Cloud SDK
         uses: "google-github-actions/setup-gcloud@v0"
       
       - name: Describe my-service-account
-        run: gcloud iam service-accounts describe 'cloud-run-deploy-preview@buta-chan.iam.gserviceaccount.com'
+        run: gcloud iam service-accounts describe cloud-run-deploy-preview@buta-chan.iam.gserviceaccount.com
 
       # - name: Configure docker
       #   run: gcloud auth configure-docker ${{ secrets.TEST }}-docker.pkg.dev

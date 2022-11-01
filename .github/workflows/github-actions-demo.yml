@@ -11,6 +11,9 @@ env:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
     steps:
       - name: Checkout
         uses: "actions/checkout@v3"
@@ -32,6 +35,12 @@ jobs:
 
       - name: Setup Cloud SDK
         uses: "google-github-actions/setup-gcloud@v0"
+      
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Describe my-service-account
+        run: gcloud iam service-accounts describe 'cloud-run-deploy-preview@buta-chan.iam.gserviceaccount.com'
 
       # - name: Configure docker
       #   run: gcloud auth configure-docker ${{ secrets.TEST }}-docker.pkg.dev

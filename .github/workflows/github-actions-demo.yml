@@ -14,7 +14,8 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     permissions:
-      id-token: "write"
+      id-token: write # This is required for requesting the JWT
+      contents: read  # This is required for actions/checkout
     steps:
       - name: Checkout
         uses: "actions/checkout@v3"

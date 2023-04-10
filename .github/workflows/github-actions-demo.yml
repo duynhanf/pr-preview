@@ -22,6 +22,8 @@ jobs:
         
       - name: Bui Duy Nhan
         uses: duynhanf/github-actions-example@v1
+        with:
+          milliseconds: 1000
 
 
       
